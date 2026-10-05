@@ -45,7 +45,7 @@ Leviathan is specific to it). Methodology, all six scales and caveats:
 ## Quickstart
 
 ```bash
-cargo install --git https://github.com/elstongun/leviathan leviathan
+cargo install leviathan-index       # or: cargo install --git https://github.com/elstongun/leviathan
 cd examples/tickets && leviathan index
 leviathan search -g acme "sso login loop after password reset"
 ```

@@ -10,7 +10,7 @@ repository = "https://github.com/elstongun/leviathan"
 authors = ["Joshua Baker <joshuapbak@gmail.com>"]
 
 [package]
-name = "leviathan"
+name = "leviathan-index"
 version = "0.1.0"
 description = "Deep memory for agents over large datasets: index JSONL, CSV, SQLite or any database export once, answer with a few ranked, cited records in about five hundred tokens. CLI + MCP server."
 readme = "README.md"
@@ -21,7 +21,15 @@ rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 authors.workspace = true
-exclude = ["bench/data/", "docs/assets/*.psd"]
+include = ["/src/**", "/README.md", "/CHANGELOG.md", "/LICENSE", "/NOTICE", "/THIRD_PARTY.md", "/docs/CONFIG.md", "/skills/**"]
+
+[lib]
+name = "leviathan"
+path = "src/lib.rs"
+
+[[bin]]
+name = "leviathan"
+path = "src/main.rs"
 
 [dependencies]
 anyhow = "1.0.104"
