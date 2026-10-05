@@ -137,8 +137,8 @@ fn fill(template: &str, rng: &mut Rng) -> String {
     template
         .replace("{n2}", &((n % 24) + 1).to_string())
         .replace("{n}", &n.to_string())
-        .replace("{side}", rng.pick(&sides))
-        .replace("{shift}", rng.pick(&shifts))
+        .replace("{side}", rng.pick::<&str>(&sides))
+        .replace("{shift}", rng.pick::<&str>(&shifts))
         .replace("{f}", &rng.range(1, 99).to_string())
 }
 
@@ -279,8 +279,8 @@ fn main() -> std::io::Result<()> {
             let breakdown = rng.chance(0.45);
             kind = if breakdown { "breakdown" } else { "corrective" };
             priority = if breakdown { "urgent" } else { "high" };
-            let context = fill(rng.pick(CONTEXT), &mut rng);
-            let symptom = fill(rng.pick(m.symptoms), &mut rng);
+            let context = fill(rng.pick::<&str>(CONTEXT), &mut rng);
+            let symptom = fill(rng.pick::<&str>(m.symptoms), &mut rng);
             let mut s = collapse(&[&context, &symptom]);
             if rng.chance(0.25) {
                 s.push_str(&format!(". {}", rng.pick(NOTES)));
@@ -291,7 +291,7 @@ fn main() -> std::io::Result<()> {
             }
             let r = rng.f();
             resolution = if r < 0.58 {
-                Some(fill(rng.pick(m.fixes), &mut rng))
+                Some(fill(rng.pick::<&str>(m.fixes), &mut rng))
             } else if r < 0.85 {
                 Some(rng.pick(STUBS).to_string())
             } else {
@@ -303,7 +303,7 @@ fn main() -> std::io::Result<()> {
                 for (i, text) in m.steps[first..first + k].iter().enumerate() {
                     let mut step = json!({"n": i + 1, "text": text});
                     if rng.chance(0.2) {
-                        step["note"] = json!(fill(rng.pick(m.fixes), &mut rng));
+                        step["note"] = json!(fill(rng.pick::<&str>(m.fixes), &mut rng));
                     }
                     steps.push(step);
                 }

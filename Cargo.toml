@@ -7,7 +7,7 @@ edition = "2024"
 rust-version = "1.88"
 license = "Apache-2.0"
 repository = "https://github.com/elstongun/leviathan"
-authors = ["Joshua Bak <joshuapbak@gmail.com>"]
+authors = ["Joshua Baker <joshuapbak@gmail.com>"]
 
 [package]
 name = "leviathan"
